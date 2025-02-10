@@ -1,0 +1,50 @@
+// React Stuff
+import { JSX } from "react";
+
+//Material
+import { Stack } from "@mui/material";
+
+// Components
+import { ProductDiscountBadge } from "./product_discount_badge";
+import { ProductInfo } from "./info/product_info";
+
+//API
+import { Sub } from "../../../../../../@types/api.type";
+
+export const ProductCard: React.FC<{ sub: Sub }> = ({ sub }): JSX.Element => {
+  return (
+    <Stack key={sub.id} flexDirection='row' gap={2} mt={1} flexWrap='wrap'>
+      {sub.food.map((food) => {
+        return (
+          <Stack
+            position='relative'
+            key={food.id}
+            sx={{
+              width: 285,
+              height: 280,
+              borderRadius: 1,
+              overflow: "hidden",
+            }}
+          >
+            {food.discountPercentage != 0.0 ? (
+              <ProductDiscountBadge discount={food.discountPercentage} />
+            ) : (
+              <></>
+            )}
+            <img
+              src={food.img.replace("#SIZEOFIMAGE#", "560x350")}
+              alt='product-image'
+            />
+
+            <ProductInfo
+              title={food.title}
+              price={food.price}
+              discountPercentage={food.discountPercentage}
+              discount={food.discount}
+            />
+          </Stack>
+        );
+      })}
+    </Stack>
+  );
+};
