@@ -44,7 +44,11 @@ export const Products: React.FC<{ categories?: Category[] }> = ({
 
             <Stack flexDirection='row' gap={2}>
               {category.sub.map((sub) => {
-                return <ProductCard sub={sub} />;
+                return (
+                  <Stack key={sub.id}>
+                    <ProductCard sub={sub} />
+                  </Stack>
+                );
               })}
             </Stack>
           </Stack>

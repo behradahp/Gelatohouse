@@ -29,7 +29,7 @@ export interface Sub {
   food: Food[];
 }
 
-interface Food {
+export interface Food {
   index: number;
   id: number;
   img: string;
@@ -66,3 +66,9 @@ interface Food {
   showInKiosk: boolean;
   kioskOrderIndex: number;
 }
+
+export type Card = {
+  id: number;
+  item: Food;
+  count: number;
+};

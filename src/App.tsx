@@ -1,5 +1,5 @@
 // React Stuff
-import { JSX } from "react";
+import { JSX, useState } from "react";
 
 // React Router Dom
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -15,22 +15,32 @@ import { InitialPage } from "./Pages/initial";
 import { OrderPage } from "./Pages/order";
 import { Layout } from "./components/Layout/layout";
 
-const App: React.FC = (): JSX.Element => {
-  return (
-    <StyleSheetManager stylisPlugins={[rtlPlugin]}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+// Context
+import { AppContext } from "./context/store";
 
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Layout />}>
-              <Route index element={<InitialPage />}></Route>
-              <Route path='/order' element={<OrderPage />}></Route>
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
-    </StyleSheetManager>
+// Interface
+import { Card } from "./@types/api.type";
+
+const App: React.FC = (): JSX.Element => {
+  const [card, setCard] = useState<Card[]>([]);
+
+  return (
+    <AppContext.Provider value={{ card, setCard }}>
+      <StyleSheetManager stylisPlugins={[rtlPlugin]}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<Layout />}>
+                <Route index element={<InitialPage />}></Route>
+                <Route path='/order' element={<OrderPage />}></Route>
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
+      </StyleSheetManager>
+    </AppContext.Provider>
   );
 };
 

@@ -7,6 +7,7 @@ import { Stack } from "@mui/material";
 // Components
 import { ProductDiscountBadge } from "./product_discount_badge";
 import { ProductInfo } from "./info/product_info";
+import { ProductIngradient } from "./info/product_indradient";
 
 //API
 import { Sub } from "../../../../../../@types/api.type";
@@ -26,6 +27,8 @@ export const ProductCard: React.FC<{ sub: Sub }> = ({ sub }): JSX.Element => {
               overflow: "hidden",
             }}
           >
+            <ProductIngradient text={food.ingredient} />
+
             {food.discountPercentage != 0.0 ? (
               <ProductDiscountBadge discount={food.discountPercentage} />
             ) : (
@@ -36,12 +39,7 @@ export const ProductCard: React.FC<{ sub: Sub }> = ({ sub }): JSX.Element => {
               alt='product-image'
             />
 
-            <ProductInfo
-              title={food.title}
-              price={food.price}
-              discountPercentage={food.discountPercentage}
-              discount={food.discount}
-            />
+            <ProductInfo {...food} />
           </Stack>
         );
       })}

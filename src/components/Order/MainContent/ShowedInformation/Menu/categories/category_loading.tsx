@@ -30,9 +30,9 @@ export const CategoryLoading: React.FC = (): JSX.Element => {
       >
         {Array(8)
           .fill(0)
-          .map((index) => {
+          .map((index, item) => {
             return (
-              <Stack key={index} spacing={1}>
+              <Stack key={item + index} spacing={1}>
                 <Skeleton variant='rectangular' width={80} height={80} />
                 <Skeleton variant='rounded' width={80} height={20} />
               </Stack>
