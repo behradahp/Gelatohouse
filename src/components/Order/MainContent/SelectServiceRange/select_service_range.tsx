@@ -7,7 +7,7 @@ import { Box, FormControl, MenuItem, Select } from "@mui/material";
 export const SelectServiceRange: React.FC = (): JSX.Element => {
   const [serviceRange, setServiceRange] = useState<string>("");
   return (
-    <Box sx={{ width: 220 }}>
+    <Box sx={{ width: { xs: "60%", md: 220 } }}>
       <FormControl fullWidth size='small'>
         <Select
           value={serviceRange}

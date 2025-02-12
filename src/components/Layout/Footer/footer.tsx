@@ -10,14 +10,21 @@ export const Footer: React.FC = (): JSX.Element => {
   return (
     <Stack>
       <Stack
-        flexDirection='row'
         justifyContent='space-between'
         alignItems='center'
+        gap={2}
         py={2}
-        px={15}
         sx={{
           borderBottom: "1px solid #EEEEEE",
           borderTop: "1px solid #EEEEEE",
+          flexDirection: {
+            xs: "column",
+            md: "row",
+          },
+          paddingX: {
+            xs: 0,
+            md: 15,
+          },
         }}
       >
         <Stack flexDirection='row' gap='4px'>
@@ -60,16 +67,23 @@ export const Footer: React.FC = (): JSX.Element => {
 
         <Typography
           variant='body1'
-          sx={{ color: "#8E8E8E", fontFamily: "Yekan-Regular", fontSize: 14 }}
+          sx={{
+            color: "#8E8E8E",
+            fontFamily: "Yekan-Regular",
+            fontSize: 14,
+            display: { xs: "none", md: "block" },
+          }}
         >
           V 1. 0. 0
         </Typography>
 
-        <img
-          src='https://img9.irna.ir/d/r2/2021/12/12/4/169271307.jpg?ts=1639298762393'
-          alt='trust'
-          width={250}
-        />
+        <Stack sx={{ display: { xs: "none", md: "block" } }}>
+          <img
+            src='https://img9.irna.ir/d/r2/2021/12/12/4/169271307.jpg?ts=1639298762393'
+            alt='trust'
+            width={250}
+          />
+        </Stack>
       </Stack>
     </Stack>
   );

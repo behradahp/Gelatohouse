@@ -1,5 +1,5 @@
 // React Stuff
-import { JSX, useState } from "react";
+import { JSX, useEffect, useRef, useState } from "react";
 
 // Material
 import { Button, Stack } from "@mui/material";
@@ -16,6 +16,12 @@ export const CategoryList: React.FC<{ categories?: Category[] }> = ({
   categories,
 }): JSX.Element => {
   const [itemIndex, setItemIndex] = useState<number>(0);
+  const [scrollCount, setScrollCount] = useState<number>(1);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (ref) setScrollCount(ref.current!.clientWidth / 100);
+  }, [ref]);
 
   return (
     <Stack
@@ -27,6 +33,7 @@ export const CategoryList: React.FC<{ categories?: Category[] }> = ({
       justifyContent='space-between'
       px={2}
       sx={{
+        width: "100%",
         borderBottom: "2px solid rgb(231, 231, 231)",
         backgroundColor: "white",
       }}
@@ -44,7 +51,7 @@ export const CategoryList: React.FC<{ categories?: Category[] }> = ({
         <ArrowForwardIosIcon />
       </Button>
 
-      <Stack sx={{ width: "800px", overflow: "hidden" }}>
+      <Stack ref={ref} sx={{ width: "100%", overflow: "hidden" }}>
         <Stack
           flexDirection='row'
           sx={{
@@ -67,10 +74,12 @@ export const CategoryList: React.FC<{ categories?: Category[] }> = ({
         sx={{
           minWidth: "min-content",
           color:
-            categories && itemIndex === categories.length - 8 ? "#CACACA" : "",
+            categories && itemIndex < categories?.length - scrollCount
+              ? ""
+              : "#CACACA",
         }}
         onClick={
-          categories && itemIndex !== categories?.length - 8
+          categories && itemIndex < categories?.length - scrollCount
             ? () => setItemIndex((prev) => prev + 1)
             : () => {}
         }

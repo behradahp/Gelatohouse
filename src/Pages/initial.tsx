@@ -55,6 +55,12 @@ export const InitialPage: React.FC = (): JSX.Element => {
           infiniteLoop: true,
         }}
         images={[...data!.map((image) => image.src)]}
+        sx={{
+          width: {
+            xs: 1500,
+            md: "100%",
+          },
+        }}
       />
     </>
   );

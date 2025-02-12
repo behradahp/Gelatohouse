@@ -65,8 +65,8 @@ export const OrderPage: React.FC = (): JSX.Element => {
             showArrows: false,
             infiniteLoop: true,
           }}
-          width='90%'
           images={[...sliderImages!.map((image) => image.src)]}
+          sx={{ width: "95%" }}
         />
       )}
 

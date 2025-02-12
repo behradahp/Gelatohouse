@@ -14,7 +14,7 @@ export const DeliveryInfo: React.FC = (): JSX.Element => {
       justifyContent='center'
       py={2}
       sx={{
-        width: 400,
+        width: { xs: "100%", md: 400 },
         backgroundColor: "white",
         borderRadius: 5,
         border: "1px solid #F0E0E4",

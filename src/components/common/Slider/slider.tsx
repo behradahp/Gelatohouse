@@ -6,25 +6,27 @@ import { Carousel, CarouselProps } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 // Material
-import { Stack } from "@mui/material";
+import { Stack, SxProps, Theme } from "@mui/material";
 
 // interface
 interface SliderProps extends Partial<CarouselProps> {
-  width?: string;
-  height?: string;
+  sx: SxProps<Theme>;
   images: string[];
 }
 
 export const Slider: React.FC<SliderProps> = ({
-  width,
-  height,
+  sx,
   images,
   ...rest
 }): JSX.Element => {
   return (
-    <Stack dir='ltr' alignItems='center'>
-      <Stack sx={{ width: width || "100%" }}>
-        <Carousel {...rest}>
+    <Stack
+      dir='ltr'
+      alignItems='center'
+      sx={{ maxWidth: "100vh", overflow: "hidden" }}
+    >
+      <Stack sx={sx} alignItems='center'>
+        <Carousel {...rest} width='100%'>
           {images.map((image) => {
             return (
               <Stack key={image}>

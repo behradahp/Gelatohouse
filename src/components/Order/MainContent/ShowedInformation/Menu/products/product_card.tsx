@@ -21,8 +21,7 @@ export const ProductCard: React.FC<{ sub: Sub }> = ({ sub }): JSX.Element => {
             position='relative'
             key={food.id}
             sx={{
-              width: 285,
-              height: 280,
+              width: { xs: "100%", md: 285 },
               borderRadius: 1,
               overflow: "hidden",
             }}
@@ -37,6 +36,7 @@ export const ProductCard: React.FC<{ sub: Sub }> = ({ sub }): JSX.Element => {
             <img
               src={food.img.replace("#SIZEOFIMAGE#", "560x350")}
               alt='product-image'
+              width='100%'
             />
 
             <ProductInfo {...food} />

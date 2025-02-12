@@ -1,20 +1,21 @@
 // React Stuff
 import { JSX, useContext } from "react";
-import { AppContext } from "../../../../context/store";
 
-// Material
+//Material
 import { Button, IconButton, Stack, Typography } from "@mui/material";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
-// Images
-import emptyShoppingCardImage from "../../../../assets/images/empty_shoping_card.png";
-
-// Interfaces
+//Context
+import { AppContext } from "../../../../context/store";
 import { Card } from "../../../../@types/api.type";
 
-export const ShoppingCard: React.FC = (): JSX.Element => {
+export const MobileCardModal: React.FC<{
+  isOpen: boolean;
+  closeFunction: () => void;
+}> = ({ isOpen, closeFunction }): JSX.Element => {
   const cardContext = useContext(AppContext);
 
   const productExistInCard = (id: number) => {
@@ -50,6 +51,8 @@ export const ShoppingCard: React.FC = (): JSX.Element => {
       const newCard2 = newCard.filter((item: Card) => item.id != id);
       cardContext.setCard(newCard2);
 
+      if (newCard2.length === 0) closeFunction();
+
       return;
     }
 
@@ -78,41 +81,50 @@ export const ShoppingCard: React.FC = (): JSX.Element => {
 
   return (
     <Stack
-      py={2}
-      position={"sticky"}
-      top={20}
+      alignItems='end'
+      position='fixed'
+      top={0}
+      left={0}
+      zIndex={10000}
       sx={{
         width: "100%",
-        backgroundColor: "white",
-        borderRadius: 2,
-        border: "1px solid #F0E0E4",
+        height: "100vh",
+        bgcolor: "rgba(0, 0, 0, 0.6)",
+        display: isOpen ? "flex" : "none",
       }}
     >
-      <Stack
-        flexDirection='row'
-        justifyContent='space-between'
-        alignItems='center'
-        px={2}
-        pb={2}
-        sx={{ borderBottom: "1px solid #F0E0E4" }}
-      >
-        <Typography variant='h6' color='secondary'>
-          سبد خرید{" "}
-          {cardContext.card.length
-            ? `(${cardContext.card.length.toLocaleString("fa")})`
-            : ""}
-        </Typography>
+      <Stack sx={{ height: "100%", bgcolor: "white", maxWidth: "min-content" }}>
+        <Stack
+          flexDirection='row'
+          gap={20}
+          alignItems='center'
+          px={2}
+          py={1}
+          sx={{ borderBottom: "1px solid #F0E0E4" }}
+        >
+          <Typography
+            variant='h6'
+            color='secondary'
+            sx={{ minWidth: "max-content" }}
+          >
+            سبد خرید ({cardContext.card.length.toLocaleString("fa")})
+          </Typography>
 
-        {cardContext.card.length ? (
-          <IconButton onClick={() => cardContext.setCard([])}>
-            <DeleteOutlinedIcon />
-          </IconButton>
-        ) : (
-          <></>
-        )}
-      </Stack>
+          <Stack flexDirection='row'>
+            <IconButton
+              onClick={() => {
+                cardContext.setCard([]);
+                closeFunction();
+              }}
+            >
+              <DeleteOutlinedIcon />
+            </IconButton>
+            <IconButton onClick={closeFunction}>
+              <CloseOutlinedIcon />
+            </IconButton>
+          </Stack>
+        </Stack>
 
-      {cardContext.card.length ? (
         <Stack>
           {cardContext.card.map((item) => {
             return (
@@ -181,14 +193,7 @@ export const ShoppingCard: React.FC = (): JSX.Element => {
             تکمیل سفارش
           </Button>
         </Stack>
-      ) : (
-        <Stack justifyContent='center' alignItems='center' sx={{ height: 215 }}>
-          <img src={emptyShoppingCardImage} alt='' />
-          <Typography variant='h6' sx={{ color: "#D5D5D5" }}>
-            سبد خرید خالی است
-          </Typography>
-        </Stack>
-      )}
+      </Stack>
     </Stack>
   );
 };

@@ -26,7 +26,11 @@ export const OrderPageWelcomeModal: React.FC<{
       }}
     >
       <Stack
-        sx={{ width: 540, borderRadius: 3, backgroundColor: "white" }}
+        sx={{
+          width: { xs: "90%", md: 540 },
+          borderRadius: 3,
+          backgroundColor: "white",
+        }}
         alignItems='center'
         gap={3}
         py={5}

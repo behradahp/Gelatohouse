@@ -19,7 +19,7 @@ export const SelectStoreBranche: React.FC = (): JSX.Element => {
   };
 
   return (
-    <Box sx={{ width: 170 }}>
+    <Box sx={{ width: { xs: "40%", md: 170 } }}>
       <FormControl fullWidth size='small'>
         <InputLabel id='demo-simple-select-label'>شعبه</InputLabel>
         <Select

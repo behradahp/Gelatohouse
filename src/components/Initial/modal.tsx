@@ -3,7 +3,7 @@ import { JSX } from "react";
 import { NavLink } from "react-router-dom";
 
 // Material
-import { Stack, Typography, Button } from "@mui/material";
+import { Stack, Typography, Button, Link } from "@mui/material";
 
 export const InitialPageModal: React.FC = (): JSX.Element => {
   return (
@@ -16,7 +16,10 @@ export const InitialPageModal: React.FC = (): JSX.Element => {
         top={140}
         py={7}
         sx={{
-          width: "970px",
+          width: {
+            xl: "980px",
+            xs: "70%",
+          },
           backgroundColor: "rgba(255, 255, 255, 0.8)",
           borderRadius: 3,
         }}
@@ -25,12 +28,21 @@ export const InitialPageModal: React.FC = (): JSX.Element => {
           لطفا شعبه مورد نظر خود را انتخاب کنید
         </Typography>
 
-        <Stack flexDirection='row' gap={2}>
-          <NavLink to='/order'>
+        <Stack flexDirection='row' gap={2} sx={{ width: "90%" }}>
+          <Link
+            component={NavLink}
+            to='/order'
+            sx={{
+              width: {
+                xl: 465,
+                xs: "50%",
+              },
+            }}
+          >
             <Button
               variant='contained'
               sx={{
-                width: 465,
+                width: "100%",
                 backgroundColor: "white",
                 color: "black",
                 fontSize: 16,
@@ -38,12 +50,21 @@ export const InitialPageModal: React.FC = (): JSX.Element => {
             >
               شهرک غرب
             </Button>
-          </NavLink>
-          <NavLink to='/order'>
+          </Link>
+          <Link
+            component={NavLink}
+            to='/order'
+            sx={{
+              width: {
+                xl: 465,
+                xs: "50%",
+              },
+            }}
+          >
             <Button
               variant='contained'
               sx={{
-                width: 465,
+                width: "100%",
                 backgroundColor: "white",
                 color: "black",
                 fontSize: 16,
@@ -51,7 +72,7 @@ export const InitialPageModal: React.FC = (): JSX.Element => {
             >
               ولنجک
             </Button>
-          </NavLink>
+          </Link>
         </Stack>
       </Stack>
     </Stack>
